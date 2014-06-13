@@ -5,4 +5,7 @@
 Makefile
 CMakeCache.txt
 release/
+release_test/
+debug/
+debug_test/
 CMakeFiles/

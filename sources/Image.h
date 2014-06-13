@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "opencv/cv.h"
+//#include "opencv/cv.h"
 
 namespace ImageRecognition {
 
@@ -17,7 +17,7 @@ public:
 	~Image() {}
 
 	void CreateDescription();
-	GetDescription(cv::Mat& description);
+	//GetDescription(cv::Mat& description);
 	bool IsDescriptionCreated();
 
 private:
