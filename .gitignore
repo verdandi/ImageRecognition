@@ -1,2 +1,8 @@
 *.swp
 *.pyc
+*.cmake
+*.a
+Makefile
+CMakeCache.txt
+release/
+CMakeFiles/

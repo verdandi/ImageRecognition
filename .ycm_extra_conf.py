@@ -27,12 +27,12 @@ flags = [
 'C:/MinGW/lib/gcc/i686-w64-mingw32/4.9.0/include',
 '-I',
 'C:/MinGW/lib/gcc/i686-w64-mingw32/4.9.0/include-fixed',
-#'-I',
-#'C:\\Workspace\\test\\sources'
-#'-I',
-#'C:/gtest/gtest',
 '-I',
-'C:/Workspace/tkpa_test/sources',
+'C:/Workspace/ImageRecognition/sources',
+'-I',
+'C:/OpenCV/',
+'-I',
+'C:/gtest',
 ]
 
 compilation_database_folder = ''

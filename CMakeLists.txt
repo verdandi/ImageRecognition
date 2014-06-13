@@ -1,12 +1,16 @@
 cmake_minimum_required(VERSION 2.8) #проверка версии cmake
-set(PROJECT fast_permutations) #присваиваем переменной PROJECT значение fast_permutations
+
+set(PROJECT ImageRecognition) #присваиваем переменной PROJECT значение ImageRecognition
+
 project(${PROJECT})
+
+set(OpenCV_DIR C:/opencv/build)
+message(${OpenCV_DIR})
+
 macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сборку с необходимыми параметрами в зависимости от значения входной переменной
 	if (${BUILD_TYPE} STREQUAL "release")#если значение входной переменной равно Debug, то
 		aux_source_directory("./sources" SOURCES)#задаем папки в которых хранятся исходники
-		find_package(OpenCV REQUIRED)
 		add_library(${PROJECT} SHARED ${SOURCES}) #создаем динамическую библиотеку
-		target_link_libraries(${PROJECT} ${OpenCV_LIBS})
 		set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS "-O2 -std=c++11 -pedantic -Wall -Wextra")#задаем ключи компилятора и макросы для цели ${PROJECT}
 		add_custom_command(TARGET ${PROJECT} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E make_directory ${BUILD_TYPE}
@@ -16,7 +20,6 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 
 	if (${BUILD_TYPE} STREQUAL "debug")#если значение входной переменной равно Debug, то
 		aux_source_directory("./sources" SOURCES)#задаем папки в которых хранятся исходники
-		find_package(OpenCV REQUIRED)
 		add_library(${PROJECT}_debug SHARED ${SOURCES}) #создаем динамическую библиотеку
 		target_link_libraries(${PROJECT}_debug ${OpenCV_LIBS})
 		set_target_properties(${PROJECT}_debug PROPERTIES COMPILE_FLAGS "-O0 -std=c++11 -g3 -pedantic -Wall -Wextra")#задаем ключи компилятора и макросы для цели ${PROJECT}
@@ -28,8 +31,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 
 	if (${BUILD_TYPE} STREQUAL "release_test")#если значение входной переменной равно Debug, то
 		aux_source_directory("./sources" SOURCES)#задаем папки в которых хранятся исходники
-		link_directories("C:/gtest")
-		find_package(OpenCV REQUIRED)
+		link_directories("C:/gtest" "C:/OpenCV")
 		add_executable(${PROJECT}_test ${SOURCES}) #создаем динамическую библиотеку
 		set_target_properties(${PROJECT}_test PROPERTIES COMPILE_FLAGS "-O2 -std=c++11 -pedantic -Wall -Wextra")#задаем ключи компилятора и макросы для цели ${PROJECT}
 		target_link_libraries(${PROJECT}_test ${OpenCV_LIBS} libgtest.a libgtest_main.a pthread)
@@ -66,3 +68,5 @@ endmacro()
 
 add_app_executable("debug")
 add_app_executable("release")
+add_app_executable("debug_test")
+add_app_executable("release_test")
