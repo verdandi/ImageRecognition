@@ -2,6 +2,8 @@
 
 #include "windows.h"
 
+#include <cstring>
+
 namespace ImageRecognition {
 
 namespace Private {
@@ -27,6 +29,36 @@ bool IsFileExist(const std::string& pathToFile) {
 	::CloseHandle(h);
 	return true;
 }//end of bool IsFileExist()
+
+void GetSubDirectoryList(const std::string& pathToDirectory, std::vector<std::string>& subDirectoryList) {
+#ifdef __IMAGE_RECOGNITION_DEBUG__
+#define D_GetSubDirectoryList_ 1
+	std::ofstream out("logGetSubDirectoryList.txt");
+#else
+#define D_GetSubDirectoryList_ 0
+#endif
+
+	//создаем шаблон для поиска
+	std::string findTemplate = pathToDirectory + "*.*";
+
+	subDirectoryList.clear();
+
+	WIN32_FIND_DATA fd;
+	HANDLE hFind = ::FindFirstFileA(findTemplate.c_str(), &fd);
+	
+	do{
+		if( (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) && std::strcmp(fd.cFileName, ".") !=0 && std::strcmp(fd.cFileName, "..") != 0 ) {
+			subDirectoryList.push_back(fd.cFileName);
+		}
+	}while (::FindNextFile(hFind, &fd) );
+	
+	::CloseHandle(hFind);
+
+	if (D_GetSubDirectoryList_) {
+		PRINTSEQ(subDirectoryList, subDirectoryList.size(), out);
+	}/* end of if */
+
+}//end of void GetSubDirectoryList()
 
 } /* Private */ 
 

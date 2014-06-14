@@ -12,12 +12,14 @@ public:
 	std::string pathToXML_;
 	std::string name_;
 	std::string notValidPath_;
+	std::string pathToDirectory_;
 
 	virtual void SetUp() {
 		pathToImage_ = "../tests_service/testImage1.jpg";
 		notValidPath_ = "../tests_service/testImage3.jpg";
 		pathToXML_ = "../tests_service/testImage1.xml";
 		name_ = "testImage1";
+		pathToDirectory_ = "../tests_service/ts1/TrainSample/";
 	}
 
 	virtual void TearDown() {}
@@ -54,6 +56,24 @@ TEST_F(ImageRecognitionServiceTest, IsFileExist){
 
 	ans = IsFileExist(notValidPath_);
 	EXPECT_TRUE(ans == false);
+}
+
+TEST_F(ImageRecognitionServiceTest, GetSubDirectoryList){
+	std::vector<std::string> expected;
+	expected.push_back("1");
+	expected.push_back("2");
+	expected.push_back("3");
+
+	std::vector<std::string> fact;
+	GetSubDirectoryList(pathToDirectory_, fact);
+
+	EXPECT_TRUE(expected.size() == fact.size());
+
+	if (expected.size() == fact.size()) {
+		for (size_t i = 0; i < fact.size(); ++i) {
+			EXPECT_TRUE(expected[i] == fact[i]);
+		}//end of for
+	}/* end of if */
 }
 
 } /* Private */ 

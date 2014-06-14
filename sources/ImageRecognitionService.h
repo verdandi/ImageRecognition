@@ -4,6 +4,7 @@
 #include "Defines.h"
 
 #include <string>
+#include <vector>
 
 namespace ImageRecognition {
 
@@ -26,6 +27,8 @@ void GetFileNameFromPath(const std::string& pathToFile, std::string& name);
 Проверить существует ли файл по пути <pathToFile>
 */
 bool IsFileExist(const std::string& pathToFile);
+
+void GetSubDirectoryList(const std::string& pathToDirectory, std::vector<std::string>& subDirectoryList);
 
 } /* Private */ 
 

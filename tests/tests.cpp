@@ -1,5 +1,6 @@
 #include "ImageRecognitionServiceTest.h"
 #include "ImageTest.h"
+#include "ImageStorageTest.h"
 
 
 int main(int argc, char *argv[]) {
