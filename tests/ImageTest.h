@@ -62,7 +62,10 @@ TEST_F(ImageTest, CreateDescription){
 }
 
 TEST_F(ImageTest, IsDescriptionCreated){
-
+	Image m(pathToTestImage4_);
+	EXPECT_TRUE(m.IsDescriptionCreated());
+	Image m1(pathToTestImage1_);
+	EXPECT_FALSE(m1.IsDescriptionCreated());
 }
 
 //TEST_F(ImageTest, GetDescription){

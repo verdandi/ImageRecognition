@@ -65,4 +65,8 @@ void Image::GetDescription(cv::Mat& description) const {
 	
 }//end of cv::Mat& Image::GetDescription()
 
+bool Image::IsDescriptionCreated() const {
+	return Private::IsFileExist(pathToImageDescription_);
+}//end of bool Image::IsDescriptionCreated()
+
 } /* ImageRecognition */ 
