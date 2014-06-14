@@ -68,21 +68,26 @@ TEST_F(ImageTest, IsDescriptionCreated){
 	EXPECT_FALSE(m1.IsDescriptionCreated());
 }
 
-//TEST_F(ImageTest, GetDescription){
-	//cv::Mat expected;
-	//cv::Mat fact;
-	//Image m(pathToTestImage4_);
-	//cv::FileStorage fs(pathToTestImage4Description_, cv::FileStorage::READ);
-	//fs["testImage2"] >> expected;
-	//m.GetDescription(fact);
-	//EXPECT_TRUE(expected.size == fact.size);
-	//if (expected.size == fact.size){
-		//cv::MatIterator_<float> eit = expected.begin<float>();
-		//cv::MatIterator_<float> fit = fact.begin<float>();
-		//for (; fit != fact.end<float>();) {
-			//EXPECT_TRUE(*fit == *eit);
-		//}//end of for
-	//}
-//}
+TEST_F(ImageTest, GetDescription){
+	cv::Mat expected;
+	cv::Mat fact;
+	Image m(pathToTestImage4_);
+	cv::FileStorage fs(pathToTestImage4Description_, cv::FileStorage::READ);
+	fs["testImage2"] >> expected;
+	m.GetDescription(fact);
+	EXPECT_TRUE(expected.size == fact.size);
+	if (expected.size == fact.size){
+		cv::MatIterator_<float> eit = expected.begin<float>();
+		cv::MatIterator_<float> fit = fact.begin<float>();
+		for (; fit != fact.end<float>();) {
+			EXPECT_TRUE(*fit == *eit);
+			++fit;
+			++eit;
+		}//end of for
+	}
+
+	Image m1(pathToTestImage1_);
+	EXPECT_THROW(m1.GetDescription(fact), Error);
+}
 
 } /* ImageRecognition */ 

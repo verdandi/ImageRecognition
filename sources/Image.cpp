@@ -61,11 +61,16 @@ void Image::CreateDescription() {
 	}
 }//end of void Image::CreateDescription()
 
-void Image::GetDescription(cv::Mat& description) const {
-	
+void Image::GetDescription(cv::Mat& description) const{
+	if (!Private::IsFileExist(pathToImageDescription_)) {
+		throw Error("Description for image " + pathToImage_ + "not created");
+	}/* end of if */
+
+	cv::FileStorage fs(pathToImageDescription_, cv::FileStorage::READ);
+	fs["testImage2"] >> description;
 }//end of cv::Mat& Image::GetDescription()
 
-bool Image::IsDescriptionCreated() const {
+bool Image::IsDescriptionCreated() const noexcept {
 	return Private::IsFileExist(pathToImageDescription_);
 }//end of bool Image::IsDescriptionCreated()
 

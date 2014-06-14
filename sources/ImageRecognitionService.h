@@ -22,6 +22,9 @@ void CreatePathToXML(const std::string& pathToImage, std::string& pathToXML);
 */
 void GetFileNameFromPath(const std::string& pathToFile, std::string& name);
 
+/*
+Проверить существует ли файл по пути <pathToFile>
+*/
 bool IsFileExist(const std::string& pathToFile);
 
 } /* Private */ 

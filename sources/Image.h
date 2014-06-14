@@ -45,9 +45,18 @@ public:
 	*/
 	void CreateDescription();
 
+	/*
+	Выдать описание изображения
+	Принимаемые параметры:
+	description - переменная, в которую считывается описание изображения
+	В случае если описание не создано, генерирует исключение типа Error
+	*/
 	void GetDescription(cv::Mat& description) const;
 
-	bool IsDescriptionCreated() const;
+	/*
+	Проверить создано ли описание
+	*/
+	bool IsDescriptionCreated() const noexcept;
 
 private:
 	static const int HEIGHT_OF_IMAGE = 32;
@@ -58,11 +67,8 @@ private:
 	std::string pathToImage_;
 	std::string pathToImageDescription_;
 	std::string fileName_;
-
-
 };//end of declaration class Image
 
 } /* ImageRecognition */ 
 
 #endif /* end of include guard: IMAGE_H_ */
-
