@@ -31,6 +31,7 @@ TEST_F(ImageRecognitionServiceTest, CreatePathToXML){
 TEST_F(ImageRecognitionServiceTest, GetFileNameFromPath){
 #ifdef __IMAGE_RECOGNITION_DEBUG__
 #define D_GetFileFromPath_ 1
+	std::ofstream out("log.txt");
 #else
 #define D_GetFileFromPath_ 0
 #endif
@@ -39,7 +40,7 @@ TEST_F(ImageRecognitionServiceTest, GetFileNameFromPath){
 	GetFileNameFromPath(pathToImage_, test);
 
 	if (D_GetFileFromPath_) {
-		PRINTVAL(test)
+		PRINTVAL(test, out)
 	}/* end of if */
 
 	EXPECT_TRUE(test == name_);
