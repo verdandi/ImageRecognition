@@ -11,9 +11,11 @@ public:
 	std::string pathToImage_;
 	std::string pathToXML_;
 	std::string name_;
+	std::string notValidPath_;
 
 	virtual void SetUp() {
 		pathToImage_ = "../tests_service/testImage1.jpg";
+		notValidPath_ = "../tests_service/testImage3.jpg";
 		pathToXML_ = "../tests_service/testImage1.xml";
 		name_ = "testImage1";
 	}
@@ -44,6 +46,14 @@ TEST_F(ImageRecognitionServiceTest, GetFileNameFromPath){
 	}/* end of if */
 
 	EXPECT_TRUE(test == name_);
+}
+
+TEST_F(ImageRecognitionServiceTest, IsFileExist){
+	bool ans = IsFileExist(pathToImage_);
+	EXPECT_TRUE(ans == true);
+
+	ans = IsFileExist(notValidPath_);
+	EXPECT_TRUE(ans == false);
 }
 
 } /* Private */ 

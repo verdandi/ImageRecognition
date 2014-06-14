@@ -16,7 +16,13 @@ namespace Private {
 */
 void CreatePathToXML(const std::string& pathToImage, std::string& pathToXML);
 
+/*
+получить им файла из пуит к нему.
+Функция копирует имя файла из <pathToFile> в <name>
+*/
 void GetFileNameFromPath(const std::string& pathToFile, std::string& name);
+
+bool IsFileExist(const std::string& pathToFile);
 
 } /* Private */ 
 

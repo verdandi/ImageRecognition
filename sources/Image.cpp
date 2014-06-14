@@ -2,20 +2,33 @@
 
 #include "Image.h"
 
-#include <iostream>
-
 namespace ImageRecognition {
 
 Image::Image(const std::string& pathToImage)
 	: pathToImage_(pathToImage),
-	pathToImageDescription_("")
-{}//end of Image::Image() 
+	pathToImageDescription_(""),
+	fileName_("")
+{
+	if (!Private::IsFileExist(pathToImage_)) {
+		throw Error("File does not exist");
+	}// end of if 
+
+	Private::CreatePathToXML(pathToImage_, pathToImageDescription_);
+	Private::GetFileNameFromPath(pathToImage_, fileName_);
+}//end of Image::Image() 
 
 Image::Image(const std::string& pathToImage,
 			const std::string& pathToImageDescription)
 	: pathToImage_(pathToImage),
-	pathToImageDescription_(pathToImageDescription)
-{}//end of Image::Image()
+	pathToImageDescription_(pathToImageDescription),
+	fileName_("")
+{
+	if (!Private::IsFileExist(pathToImage_)) {
+		throw Error("File does not exist");
+	}// end of if 
+
+	Private::GetFileNameFromPath(pathToImage_, fileName_);
+}//end of Image::Image()
 
 void Image::CreateDescription() {
 #ifdef __IMAGE_RECOGNITION_DEBUG__
@@ -24,20 +37,6 @@ void Image::CreateDescription() {
 #else
 #define D_CreateDescription_ 0
 #endif
-
-	//если путь к месту хранения описания не задан, то создадим описание рядом с картинкой
-	if (pathToImageDescription_ == "") {
-		Private::CreatePathToXML(pathToImage_, pathToImageDescription_);
-	}/* end of if */
-
-	std::string fileName;
-	Private::GetFileNameFromPath(pathToImage_, fileName);
-
-	if (D_CreateDescription_) {
-		PRINTVAL(pathToImage_, out);
-		PRINTVAL(pathToImageDescription_, out);
-		PRINTVAL(fileName, out);
-	}/* end of if */
 
 	try{
 		cv::Mat img = cv::imread(pathToImage_);
@@ -54,12 +53,16 @@ void Image::CreateDescription() {
 		}/* end of if */
 
 		cv::FileStorage fs(pathToImageDescription_, cv::FileStorage::WRITE);
-		fs << fileName << cv::Mat(1, description.size(), CV_32FC1, description.data());
+		fs << fileName_ << cv::Mat(1, description.size(), CV_32FC1, description.data());
 	}
 	catch(const cv::Exception& e){
 		std::string error(e.what());
 		throw Error(error);
 	}
 }//end of void Image::CreateDescription()
+
+void Image::GetDescription(cv::Mat& description) const {
+	
+}//end of cv::Mat& Image::GetDescription()
 
 } /* ImageRecognition */ 

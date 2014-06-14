@@ -4,9 +4,6 @@
 #include "Defines.h"
 #include "ImageRecognitionError.h"
 
-#include <string>
-
-//#include "opencv/cv.hpp"
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -19,13 +16,38 @@ class Image {
 класс для работы с изображениями
 */
 public:
-	Image (const std::string& pathToImage);
+	/*
+	Конструктор.
+	Принимаемые параметры:
+	- pathToImage - путь к изображению.
+	Примечание! Имя файла в задаваемых путях должно быть длинее 1 символа
+	и не должно содержать только цифры
+	*/
+	explicit Image (const std::string& pathToImage);
+
+	/*
+	Конструктор.
+	Принимаемые параметры:
+	- pathToImage - путь к изображению.
+	- pathToImageDescription - путь к описанию изображения
+	Примечание! Имя файла в задаваемых путях должно быть длинее 1 символа
+	и не должно содержать только цифры
+	*/
 	Image (const std::string& pathToImage, const std::string& pathToImageDescription);
+
 	~Image() {}
 
+	/*
+	создать .xml-файл описания параметров картинки.
+	В случае если путь к описанию задан, оно создается по этому пути.
+	В случае если путь к описанию НЕ задан - оно создается рядом с картинкой.
+	Функция может генерировать исключения вида ImageRecognition::Error
+	*/
 	void CreateDescription();
-	//GetDescription(cv::Mat& description);
-	bool IsDescriptionCreated();
+
+	void GetDescription(cv::Mat& description) const;
+
+	bool IsDescriptionCreated() const;
 
 private:
 	static const int HEIGHT_OF_IMAGE = 32;
@@ -35,6 +57,7 @@ private:
 
 	std::string pathToImage_;
 	std::string pathToImageDescription_;
+	std::string fileName_;
 
 
 };//end of declaration class Image
