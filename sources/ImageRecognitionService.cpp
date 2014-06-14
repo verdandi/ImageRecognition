@@ -10,6 +10,12 @@ void CreatePathToXML(const std::string& pathToImage, std::string& pathToXML) {
 		pathToXML = std::string(pathToImage.begin(), pathToImage.begin() + dotPos) + suffix;
 }//end of void CreatePathToXML()
 
+void GetFileNameFromPath(const std::string& pathToFile, std::string& name) {
+	int slashPos = pathToFile.find_last_of("/");
+	int dotPos = pathToFile.find_last_of(".");
+	name = std::string(pathToFile.begin() + slashPos+1, pathToFile.begin() + dotPos);
+}//end of void GetFileNameFromPath()
+
 } /* Private */ 
 
 } /* ImageRecognition */ 

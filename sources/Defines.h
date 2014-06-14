@@ -1,6 +1,7 @@
 #ifndef DEFINES_H_
 #define DEFINES_H_
 
+#ifdef __IMAGE_RECOGNITION_DEBUG__
 #include <iostream>
 #include <fstream>
 #include <list>
@@ -13,6 +14,7 @@
 #include <string>
 #include <stack>
 #include <cassert>
+#endif
 
 #ifdef __IMAGE_RECOGNITION_DEBUG__
 #include <cstdio>
@@ -44,7 +46,7 @@
 #endif
 
 #ifdef __IMAGE_RECOGNITION_DEBUG__
-#define PRINTVAL(val) {std::cout << "str. " << __LINE__ << ": " << #val << " - " << val << "\n";}
+#define PRINTVAL(val) {std::cout << "file: " << __FILE__ << ", str. " << __LINE__ << ": " << #val << " - " << val << "\n";}
 #else
 #define PRINTVAL(val)
 #endif

@@ -9,6 +9,7 @@ flags = [
 '-Wextra',
 '-Werror',
 '-std=c++11',
+#'-D__IMAGE_RECOGNITION_DEBUG__
 '-x',
 'c++',
 '-I',

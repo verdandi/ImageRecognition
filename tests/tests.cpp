@@ -1,4 +1,6 @@
-#include "ImageTest.h"
+#include "ImageRecognitionServiceTest.h"
+//#include "ImageTest.h"
+
 
 int main(int argc, char *argv[]) {
 	::testing::InitGoogleTest(&argc, argv);
