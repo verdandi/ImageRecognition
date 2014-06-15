@@ -1,3 +1,6 @@
+#ifndef IMAGE_RECOGNITION_ERROR_H_
+#define IMAGE_RECOGNITION_ERROR_H_
+
 #include <string>
 #include <exception>
 
@@ -21,3 +24,5 @@ private:
 };//end of declaration class ImageRecognitionError
 
 } /* ImageRecognition */ 
+
+#endif /* end of include guard: IMAGE_RECOGNITION_ERROR_H_ */

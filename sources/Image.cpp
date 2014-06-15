@@ -9,7 +9,7 @@ Image::Image(const std::string& pathToImage)
 	pathToImageDescription_(""),
 	fileName_("")
 {
-	if (!Private::IsFileExist(pathToImage_)) {
+	if (!Private::IsPathFileExist(pathToImage_)) {
 		throw Error("File does not exist");
 	}// end of if 
 
@@ -23,7 +23,7 @@ Image::Image(const std::string& pathToImage,
 	pathToImageDescription_(pathToImageDescription),
 	fileName_("")
 {
-	if (!Private::IsFileExist(pathToImage_)) {
+	if (!Private::IsPathFileExist(pathToImage_)) {
 		throw Error("File does not exist");
 	}// end of if 
 
@@ -62,7 +62,7 @@ void Image::CreateDescription() {
 }//end of void Image::CreateDescription()
 
 void Image::GetDescription(cv::Mat& description) const{
-	if (!Private::IsFileExist(pathToImageDescription_)) {
+	if (!Private::IsPathFileExist(pathToImageDescription_)) {
 		throw Error("Description for image " + pathToImage_ + "not created");
 	}/* end of if */
 
@@ -71,7 +71,7 @@ void Image::GetDescription(cv::Mat& description) const{
 }//end of cv::Mat& Image::GetDescription()
 
 bool Image::IsDescriptionCreated() const noexcept {
-	return Private::IsFileExist(pathToImageDescription_);
+	return Private::IsPathFileExist(pathToImageDescription_);
 }//end of bool Image::IsDescriptionCreated()
 
 } /* ImageRecognition */ 

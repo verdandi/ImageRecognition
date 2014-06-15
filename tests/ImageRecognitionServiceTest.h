@@ -53,10 +53,10 @@ TEST_F(ImageRecognitionServiceTest, GetFileNameFromPath){
 }
 
 TEST_F(ImageRecognitionServiceTest, IsFileExist){
-	bool ans = IsFileExist(pathToImage_);
+	bool ans = IsPathFileExist(pathToImage_);
 	EXPECT_TRUE(ans == true);
 
-	ans = IsFileExist(notValidPath_);
+	ans = IsPathFileExist(notValidPath_);
 	EXPECT_TRUE(ans == false);
 }
 

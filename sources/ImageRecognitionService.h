@@ -26,7 +26,7 @@ void GetFileNameFromPath(const std::string& pathToFile, std::string& name);
 /*
 Проверить существует ли файл по пути <pathToFile>
 */
-bool IsFileExist(const std::string& pathToFile);
+bool IsPathFileExist(const std::string& pathToFile);
 
 /*
 Получить список поддиректорий в директории <pathToDirectory>

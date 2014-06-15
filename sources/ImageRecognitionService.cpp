@@ -1,6 +1,7 @@
 #include "ImageRecognitionService.h"
 
 #include "windows.h"
+#include "shlwapi.h"
 
 #include <cstring>
 
@@ -20,14 +21,16 @@ void GetFileNameFromPath(const std::string& pathToFile, std::string& name) {
 	name = std::string(pathToFile.begin() + slashPos+1, pathToFile.begin() + dotPos);
 }//end of void GetFileNameFromPath()
 
-bool IsFileExist(const std::string& pathToFile) {
-	HANDLE h = ::CreateFileA(pathToFile.c_str(), GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
-	if (h == INVALID_HANDLE_VALUE) {
-		return false;
+bool IsPathFileExist(const std::string& pathToFile) {
+	int ans = ::PathFileExistsA(pathToFile.c_str());
+	if (ans == 1) {
+		return true;
 	}/* end of if */
+	else if(ans == 0){
+		return false;
+	}//end of if
 
-	::CloseHandle(h);
-	return true;
+	return false;
 }//end of bool IsFileExist()
 
 void GetSubDirectoryList(const std::string& pathToDirectory, std::vector<std::string>& subDirectoryList) {

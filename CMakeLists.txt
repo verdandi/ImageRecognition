@@ -14,7 +14,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 		link_directories("C:/OpenCV/bin")
 		add_library(${PROJECT} SHARED ${SOURCES}) #создаем динамическую библиотеку
 		set_target_properties(${PROJECT} PROPERTIES COMPILE_FLAGS "-O2 -std=c++11 -pedantic -Wall -Wextra")#задаем ключи компилятора и макросы для цели ${PROJECT}
-		target_link_libraries(${PROJECT} opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
+		target_link_libraries(${PROJECT} shlwapi opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
 		add_custom_command(TARGET ${PROJECT} POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E make_directory ${BUILD_TYPE}
 			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT}> ${BUILD_TYPE}
@@ -27,7 +27,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 		link_directories("C:/OpenCV/bin")
 		add_library(${PROJECT}_debug SHARED ${SOURCES}) #создаем динамическую библиотеку
 		set_target_properties(${PROJECT}_debug PROPERTIES COMPILE_FLAGS "-O0 -std=c++11 -g3 -pedantic -Wall -Wextra -D__IMAGE_RECOGNITION_DEBUG__")#задаем ключи компилятора и макросы для цели ${PROJECT}
-		target_link_libraries(${PROJECT}_debug opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
+		target_link_libraries(${PROJECT}_debug shlwapi opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
 		add_custom_command(TARGET ${PROJECT}_debug POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E make_directory ${BUILD_TYPE}
 			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT}_debug> ${BUILD_TYPE}
@@ -41,7 +41,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 		link_directories("C:/gtest" "C:/OpenCV/bin")
 		add_executable(${PROJECT}_test ${SOURCES_TEST}) #создаем динамическую библиотеку
 		set_target_properties(${PROJECT}_test PROPERTIES COMPILE_FLAGS "-O2 -std=c++11 -pedantic -Wall -Wextra -D__IMAGE_RECOGNITION_TEST__")#задаем ключи компилятора и макросы для цели ${PROJECT}
-		target_link_libraries(${PROJECT}_test gtest gtest_main opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
+		target_link_libraries(${PROJECT}_test gtest gtest_main shlwapi opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
 		add_custom_command(TARGET ${PROJECT}_test POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E make_directory ${BUILD_TYPE}
 			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT}_test> ${BUILD_TYPE}
@@ -56,7 +56,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 		link_directories("C:/gtest" "C:/OpenCV/bin")
 		add_executable(${PROJECT}_debug_test ${SOURCES_TEST}) #создаем динамическую библиотеку
 		set_target_properties(${PROJECT}_debug_test PROPERTIES COMPILE_FLAGS "-O0 -g3 -std=c++11 -pedantic -Wall -Wextra -D__IMAGE_RECOGNITION_TEST__ -D__IMAGE_RECOGNITION_DEBUG__")#задаем ключи компилятора и макросы для цели ${PROJECT}
-		target_link_libraries(${PROJECT}_debug_test gtest gtest_main opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
+		target_link_libraries(${PROJECT}_debug_test gtest gtest_main shlwapi opencv_core249 opencv_highgui249 opencv_imgproc249 opencv_objdetect249)
 		add_custom_command(TARGET ${PROJECT}_debug_test POST_BUILD
 			COMMAND ${CMAKE_COMMAND} -E make_directory ${BUILD_TYPE}
 			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT}_debug_test> ${BUILD_TYPE}
