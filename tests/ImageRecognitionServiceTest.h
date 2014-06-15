@@ -13,6 +13,7 @@ public:
 	std::string name_;
 	std::string notValidPath_;
 	std::string pathToDirectory_;
+	std::string pathToDirectory2_;
 
 	virtual void SetUp() {
 		pathToImage_ = "../tests_service/testImage1.jpg";
@@ -20,6 +21,7 @@ public:
 		pathToXML_ = "../tests_service/testImage1.xml";
 		name_ = "testImage1";
 		pathToDirectory_ = "../tests_service/ts1/TrainSample/";
+		pathToDirectory2_ = "../tests_service/ts1/TrainSample/1/";
 	}
 
 	virtual void TearDown() {}
@@ -66,6 +68,23 @@ TEST_F(ImageRecognitionServiceTest, GetSubDirectoryList){
 
 	std::vector<std::string> fact;
 	GetSubDirectoryList(pathToDirectory_, fact);
+
+	EXPECT_TRUE(expected.size() == fact.size());
+
+	if (expected.size() == fact.size()) {
+		for (size_t i = 0; i < fact.size(); ++i) {
+			EXPECT_TRUE(expected[i] == fact[i]);
+		}//end of for
+	}/* end of if */
+}
+
+TEST_F(ImageRecognitionServiceTest, GetFileList){
+	std::vector<std::string> expected;
+	expected.push_back("s1.jpg");
+	expected.push_back("s2.jpg");
+
+	std::vector<std::string> fact;
+	GetFileList(pathToDirectory2_, fact);
 
 	EXPECT_TRUE(expected.size() == fact.size());
 

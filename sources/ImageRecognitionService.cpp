@@ -60,6 +60,35 @@ void GetSubDirectoryList(const std::string& pathToDirectory, std::vector<std::st
 
 }//end of void GetSubDirectoryList()
 
+void GetFileList(const std::string& pathToDirectory, std::vector<std::string>& fileList) {
+#ifdef __IMAGE_RECOGNITION_DEBUG__
+#define D_GetFileList_ 1
+	std::ofstream out("logGetFileList.txt");
+#else
+#define D_GetFileList_ 0
+#endif
+	//создаем шаблон для поиска
+	std::string findTemplate = pathToDirectory + "*.*";
+
+	fileList.clear();
+
+	WIN32_FIND_DATA fd;
+	HANDLE hFind = ::FindFirstFileA(findTemplate.c_str(), &fd);
+	
+	do{
+		if( (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == 0 ) {
+			fileList.push_back(fd.cFileName);
+		}
+	}while (::FindNextFile(hFind, &fd) );
+	
+	::CloseHandle(hFind);
+
+	if (D_GetFileList_) {
+		PRINTSEQ(fileList, fileList.size(), out);
+	}/* end of if */
+
+}//end of void GetFileList()
+
 } /* Private */ 
 
 } /* ImageRecognition */ 

@@ -28,7 +28,26 @@ void GetFileNameFromPath(const std::string& pathToFile, std::string& name);
 */
 bool IsFileExist(const std::string& pathToFile);
 
+/*
+Получить список поддиректорий в директории <pathToDirectory>
+(можно получить список ТОЛЬКО поддиректорий. Если в папке встречаются
+файлы - они игнорируются)
+Принимаемые параметры:
+- pathToDirectory - путь к директории, список поддиректориий хочется получить
+(должен заканчиваться слешом ('/'))
+- subDirectoryList - сюда список поддиректорий будет сохранен
+*/
 void GetSubDirectoryList(const std::string& pathToDirectory, std::vector<std::string>& subDirectoryList);
+
+/*
+Получить список файлов в директории <pathToDirectory> (можно 
+получить список ТОЛЬКО файлов. Если в папке встречаются директории, то они игнорируются)
+Принимаемые параметры:
+- pathToDirectory - путь к директории, список файлов в которой хочется получить 
+(должен оканчиваться слешом ('/'))
+- fileList - сюда список файлов будет сохранен
+*/
+void GetFileList(const std::string& pathToDirectory, std::vector<std::string>& fileList);
 
 } /* Private */ 
 
