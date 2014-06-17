@@ -47,6 +47,13 @@ public:
 	удалить ранее созданное хранилище
 	*/
 	void Remove();
+
+	/*
+	проверить создано ли хранилище
+	Возвращаемое значение:
+	true - если создано.
+	*/
+	bool WasCreated();
 private:
 	static const char TRAIN_SAMPLE_NAME[];
 	static const char TRAIN_SAMPLE_DESCRIPTION[];

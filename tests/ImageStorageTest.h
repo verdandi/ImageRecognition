@@ -48,9 +48,15 @@ TEST_F(StorageTest, CreateRemove){
 	EXPECT_FALSE(Private::IsPathFileExist("../tests_service/ts1/TrainSampleDescription"));
 }
 
-TEST_F(StorageTest, StorageWasCreate){
+TEST_F(StorageTest, StorageWasCreated){
 	Storage s("../tests_service/ts3");
 	EXPECT_THROW(s.Create(), Error);
+}
+
+TEST_F(StorageTest, WasStorageCreated){
+	Storage s("../tests_service/ts3");
+	
+	EXPECT_TRUE(s.WasCreated());
 }
 
 } /* ImageRecognition */ 

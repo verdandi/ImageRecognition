@@ -100,4 +100,8 @@ void Storage::Remove() {
 	::RemoveDirectoryA(pathToTrainSampleDescription_.c_str());
 }//end of void Storage::Remove()
 
+bool Storage::WasCreated() {
+	return Private::IsPathFileExist(pathToTrainSampleDescription_);
+}//end of bool Storage::WasCreated()
+
 } /* ImageRecognition */ 
