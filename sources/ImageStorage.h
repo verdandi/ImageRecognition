@@ -39,9 +39,14 @@ public:
 	есть изобрежние s1.jpg, а в каталоге "2" - изображение s2.jpg. Тогда данная функция 
 	создаст каталог <pathToStorage>/TrainSampleDescription с подкаталогами "1" и "2", в каждом
 	из которых будут созданы файлы s1.xml и s2.xml  соответственно.
+	Если хранилище уже было создано ранее, вызывается исключение типа Error
 	*/
 	void Create();
 
+	/*
+	удалить ранее созданное хранилище
+	*/
+	void Remove();
 private:
 	static const char TRAIN_SAMPLE_NAME[];
 	static const char TRAIN_SAMPLE_DESCRIPTION[];

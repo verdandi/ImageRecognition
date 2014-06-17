@@ -28,7 +28,7 @@ TEST_F(StorageTest, Construction){
 	EXPECT_THROW(Storage("../tests_service/ts4"), Error);
 }
 
-TEST_F(StorageTest, CreateTest){
+TEST_F(StorageTest, CreateRemove){
 	Storage s(pathToStorage1_);
 	s.Create();
 
@@ -43,16 +43,9 @@ TEST_F(StorageTest, CreateTest){
 	EXPECT_TRUE(Private::IsPathFileExist("../tests_service/ts1/TrainSampleDescription/2/s5.xml"));
 	EXPECT_TRUE(Private::IsPathFileExist("../tests_service/ts1/TrainSampleDescription/3/s6.xml"));
 
-	::DeleteFileA("../tests_service/ts1/TrainSampleDescription/1/s1.xml");
-	::DeleteFileA("../tests_service/ts1/TrainSampleDescription/1/s2.xml");
-	::DeleteFileA("../tests_service/ts1/TrainSampleDescription/2/s3.xml");
-	::DeleteFileA("../tests_service/ts1/TrainSampleDescription/2/s4.xml");
-	::DeleteFileA("../tests_service/ts1/TrainSampleDescription/2/s5.xml");
-	::DeleteFileA("../tests_service/ts1/TrainSampleDescription/3/s6.xml");
-	::RemoveDirectoryA("../tests_service/ts1/TrainSampleDescription/1");
-	::RemoveDirectoryA("../tests_service/ts1/TrainSampleDescription/2");
-	::RemoveDirectoryA("../tests_service/ts1/TrainSampleDescription/3");
-	::RemoveDirectoryA("../tests_service/ts1/TrainSampleDescription");
+	s.Remove();
+
+	EXPECT_FALSE(Private::IsPathFileExist("../tests_service/ts1/TrainSampleDescription"));
 }
 
 TEST_F(StorageTest, StorageWasCreate){

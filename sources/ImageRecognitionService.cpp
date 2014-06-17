@@ -55,7 +55,7 @@ void GetSubDirectoryList(const std::string& pathToDirectory, std::vector<std::st
 		}
 	}while (::FindNextFile(hFind, &fd) );
 	
-	::CloseHandle(hFind);
+	::FindClose(hFind);
 
 	if (D_GetSubDirectoryList_) {
 		PRINTSEQ(subDirectoryList, subDirectoryList.size(), out);
@@ -84,7 +84,7 @@ void GetFileList(const std::string& pathToDirectory, std::vector<std::string>& f
 		}
 	}while (::FindNextFile(hFind, &fd) );
 	
-	::CloseHandle(hFind);
+	::FindClose(hFind);
 
 	if (D_GetFileList_) {
 		PRINTSEQ(fileList, fileList.size(), out);

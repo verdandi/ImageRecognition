@@ -80,7 +80,24 @@ void Storage::Create() {
 			m.CreateDescription();
 		}//end of for
 	}//end of for
-
 }//end of void ImageStorage::Create()
+
+void Storage::Remove() {
+	std::vector<std::string> subDirectoryList;
+	Private::GetSubDirectoryList(pathToTrainSampleDescription_, subDirectoryList);
+	for (size_t i = 0; i < subDirectoryList.size(); ++i) {
+		std::string curDir = pathToTrainSampleDescription_ + subDirectoryList[i] + SEPARATOR;
+		std::vector<std::string> fileList;
+		Private::GetFileList(curDir, fileList);
+		for (size_t i = 0; i < fileList.size(); ++i) {
+			std::string pathToFile = curDir + fileList[i];
+			::DeleteFileA(pathToFile.c_str());
+		}//end of for
+
+		::RemoveDirectoryA(curDir.c_str());
+	}//end of for
+
+	::RemoveDirectoryA(pathToTrainSampleDescription_.c_str());
+}//end of void Storage::Remove()
 
 } /* ImageRecognition */ 
