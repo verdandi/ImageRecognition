@@ -8,7 +8,7 @@ set(OpenCV_DIR C:/opencv/build)
 message(${OpenCV_DIR})
 
 macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сборку с необходимыми параметрами в зависимости от значения входной переменной
-	if (${BUILD_TYPE} STREQUAL "release")#если значение входной переменной равно Debug, то
+	if (${BUILD_TYPE} STREQUAL "release")#если значение входной переменной равно release, то
 		aux_source_directory("./sources" SOURCES)#задаем папки в которых хранятся исходники
 		include_directories("C:/OpenCV")
 		link_directories("C:/OpenCV/bin")
@@ -21,7 +21,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 			COMMAND ${CMAKE_COMMAND} -E remove $<TARGET_FILE:${PROJECT}>)
 	endif ()
 
-	if (${BUILD_TYPE} STREQUAL "debug")#если значение входной переменной равно Debug, то
+	if (${BUILD_TYPE} STREQUAL "debug")#если значение входной переменной равно debug, то
 		aux_source_directory("./sources" SOURCES)#задаем папки в которых хранятся исходники
 		include_directories("C:/OpenCV")
 		link_directories("C:/OpenCV/bin")
@@ -34,7 +34,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 			COMMAND ${CMAKE_COMMAND} -E remove $<TARGET_FILE:${PROJECT}_debug>)
 	endif ()
 
-	if (${BUILD_TYPE} STREQUAL "release_test")#если значение входной переменной равно Debug, то
+	if (${BUILD_TYPE} STREQUAL "release_test")#если значение входной переменной равно release_test то
 		aux_source_directory("./sources" SOURCES_TEST)#задаем папки в которых хранятся исходники
 		aux_source_directory("./tests" SOURCES_TEST)#задаем папки в которых хранятся исходники
 		include_directories("C:/OpenCV" "C:/gtest")
@@ -49,7 +49,7 @@ macro(add_app_executable BUILD_TYPE) #макрос, выполняющий сб�
 		run_test(${PROJECT}_test)
 	endif ()
 
-	if (${BUILD_TYPE} STREQUAL "debug_test")#если значение входной переменной равно Debug, то
+	if (${BUILD_TYPE} STREQUAL "debug_test")#если значение входной переменной равно debug_test, то
 		aux_source_directory("./sources" SOURCES_TEST)#задаем папки в которых хранятся исходники
 		aux_source_directory("./tests" SOURCES_TEST)#задаем папки в которых хранятся исходники
 		include_directories("C:/OpenCV" "C:/gtest")
