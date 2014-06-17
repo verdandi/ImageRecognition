@@ -3,6 +3,7 @@
 
 #include "Defines.h"
 #include "ImageRecognitionError.h"
+#include "Image.h"
 
 #include <string>
 
@@ -26,7 +27,7 @@ public:
 	*/
 	explicit Storage (const std::string& pathToStorage);
 
-	~Storage (){}
+	//~Storage (){}
 
 	/*
 	Создать хранилище.
@@ -53,7 +54,9 @@ public:
 	Возвращаемое значение:
 	true - если создано.
 	*/
-	bool WasCreated();
+	bool WasCreated() const;
+
+	void GetImages(const std::vector<int>& classNumbers, std::vector<Image>& imageList) const;
 private:
 	static const char TRAIN_SAMPLE_NAME[];
 	static const char TRAIN_SAMPLE_DESCRIPTION[];

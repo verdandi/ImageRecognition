@@ -35,7 +35,7 @@ public:
 	*/
 	Image (const std::string& pathToImage, const std::string& pathToImageDescription);
 
-	~Image() {}
+	//~Image() {}
 
 	/*
 	создать .xml-файл описания параметров картинки.

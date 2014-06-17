@@ -1,6 +1,6 @@
 #include "Defines.h"
 
-#include "Image.h"
+//#include "Image.h"
 #include "ImageStorage.h"
 #include "ImageRecognitionService.h"
 
@@ -100,8 +100,26 @@ void Storage::Remove() {
 	::RemoveDirectoryA(pathToTrainSampleDescription_.c_str());
 }//end of void Storage::Remove()
 
-bool Storage::WasCreated() {
+bool Storage::WasCreated()  const {
 	return Private::IsPathFileExist(pathToTrainSampleDescription_);
 }//end of bool Storage::WasCreated()
+
+void Storage::GetImages(const std::vector<int>& classNumbers, std::vector<Image>& imageList) const {
+	imageList.clear();
+
+	for (size_t i = 0; i < classNumbers.size(); ++i) {
+		char classPathName = '0' + classNumbers[i];
+		std::string pathToCurrentClass = pathToTrainSample_ + classPathName + SEPARATOR;
+		std::string pathToCurrentClassDescription = pathToTrainSampleDescription_ + classPathName + SEPARATOR;
+		std::vector<std::string> imageNames;
+		std::vector<std::string> imageDescriptions;
+		Private::GetFileList(pathToCurrentClass, imageNames);
+		Private::GetFileList(pathToCurrentClassDescription, imageDescriptions);
+		for (size_t i = 0; i < imageNames.size(); ++i) {
+			imageList.push_back(Image(pathToCurrentClass + imageNames[i], pathToCurrentClassDescription + imageDescriptions[i]));
+		}//end of for
+	}//end of for
+}//end of void Storage::GetImages()
+
 
 } /* ImageRecognition */ 

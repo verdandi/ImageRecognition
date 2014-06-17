@@ -59,4 +59,21 @@ TEST_F(StorageTest, WasStorageCreated){
 	EXPECT_TRUE(s.WasCreated());
 }
 
+TEST_F(StorageTest, GetImages){
+	Storage s("../tests_service/ts3");
+	std::vector<int> classNumbers;
+	classNumbers.push_back(2);
+	std::vector<Image> images;
+
+	s.GetImages(classNumbers, images);
+	EXPECT_TRUE(images.size() == 3);
+
+	classNumbers.clear();
+	classNumbers.push_back(1);
+	classNumbers.push_back(3);
+
+	s.GetImages(classNumbers, images);
+	EXPECT_TRUE(images.size() == 3);
+}
+
 } /* ImageRecognition */ 
