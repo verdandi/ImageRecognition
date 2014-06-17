@@ -23,7 +23,7 @@ Storage::Storage(const std::string& pathToStorage): pathToStorage_(pathToStorage
 		pathToStorage_ += SEPARATOR;
 	}/* end of if */
 
-	pathToTrainSample_ = pathToStorage_ + TRAIN_SAMPLE_NAME;
+	pathToTrainSample_ = pathToStorage_ + TRAIN_SAMPLE_NAME + SEPARATOR;
 	pathToTrainSampleDescription_ = pathToStorage_ + TRAIN_SAMPLE_DESCRIPTION + SEPARATOR;
 
 	if (D_Storage_) {
@@ -35,15 +35,30 @@ Storage::Storage(const std::string& pathToStorage): pathToStorage_(pathToStorage
 		throw Error("Dirctory " + pathToStorage_ + " not exist or not valid");
 	}/* end of if */
 
-	pathToTrainSample_ += SEPARATOR;
+	std::vector<std::string> subDirectoryList;
+	Private::GetSubDirectoryList(pathToTrainSample_, subDirectoryList);
 
+	for (size_t i = 0; i < subDirectoryList.size(); ++i) {
+		char dig = '0'+(i+1);
+		if (subDirectoryList[i][0] != dig) {
+			throw Error("Directory " + pathToTrainSample_ + "has bad structure");
+		}/* end of if */
+	}//end of for
 }//end of Storage::Storage()
 
 void Storage::Create() {
+	//проверяем не было ли хранилище создано ранее
+	if (Private::IsPathFileExist(pathToTrainSampleDescription_)) {
+		throw Error("Storage was created. If you want to create new storage, first remove old");
+	}/* end of if */
+
+	//создвем хранилище
 	if(!::CreateDirectoryA(pathToTrainSampleDescription_.c_str(), NULL)){
 		throw Error("Could not create folder " + pathToTrainSampleDescription_ + " , check user rights");
 	}//end of if
 
+	//получаем список поддиректорий каталога <pathToTrainSample_>
+	//и создаем аналогичную структуру в каталоге <pathToTrainSampleDescription_>
 	std::vector<std::string> directoryList;
 	Private::GetSubDirectoryList(pathToTrainSample_, directoryList);
 	for (size_t i = 0; i < directoryList.size(); ++i) {
@@ -52,6 +67,7 @@ void Storage::Create() {
 			throw Error("Could not create folder " + pathToCurrentClassDescription + " , check user rights");
 		}
 
+		//создаем описание для каждой картинки в каждом подкаталоге каталога <pathToTrainSample_>
 		std::vector<std::string> imageList;
 		std::string pathToCurrentClass = pathToTrainSample_ + directoryList[i] + SEPARATOR;
 		Private::GetFileList(pathToCurrentClass, imageList);

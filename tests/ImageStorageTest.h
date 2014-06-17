@@ -24,6 +24,8 @@ TEST_F(StorageTest, Construction){
 	EXPECT_NO_THROW(Storage("../tests_service/ts1"));
 
 	EXPECT_THROW(Storage("../tests_service"), Error);
+
+	EXPECT_THROW(Storage("../tests_service/ts4"), Error);
 }
 
 TEST_F(StorageTest, CreateTest){
@@ -51,6 +53,11 @@ TEST_F(StorageTest, CreateTest){
 	::RemoveDirectoryA("../tests_service/ts1/TrainSampleDescription/2");
 	::RemoveDirectoryA("../tests_service/ts1/TrainSampleDescription/3");
 	::RemoveDirectoryA("../tests_service/ts1/TrainSampleDescription");
+}
+
+TEST_F(StorageTest, StorageWasCreate){
+	Storage s("../tests_service/ts3");
+	EXPECT_THROW(s.Create(), Error);
 }
 
 } /* ImageRecognition */ 
